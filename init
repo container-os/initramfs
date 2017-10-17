@@ -1,0 +1,26 @@
+#! /usr/bin/ash
+
+# Mount the /proc and /sys filesystems.
+mount -t devtmpfs none /dev
+mount -t proc none /proc
+mount -t sysfs none /sys
+
+rescue_shell() {
+    echo "Something went wrong. Dropping to a shell."
+    exec ash
+}
+
+# enable lvm VG
+echo "make lvm group"
+lvm vgscan --mknodes
+lvm lvchange -a ly atomicos/root
+lvm vgscan --mknodes
+
+mount /dev/mapper/atomicos-root /sysroot
+mount /dev/vda1 /sysroot/boot
+
+/usr/lib/ostree/ostree-prepare-root /sysroot || rescue_shell
+
+umount /dev /proc /sys
+echo "switch to rootfs"
+exec switch_root /sysroot /sbin/init || rescue_shell
