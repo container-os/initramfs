@@ -17,7 +17,6 @@ lvm lvchange -a ly atomicos/root
 lvm vgscan --mknodes
 
 mount /dev/mapper/atomicos-root /sysroot
-mount /dev/vda1 /sysroot/boot
 
 /usr/lib/ostree/ostree-prepare-root /sysroot || rescue_shell
 
