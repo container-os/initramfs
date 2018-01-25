@@ -1,9 +1,9 @@
 # step1: initramfs compress
 
-find -P . | grep -Ev ".git|README.md" |cpio -o -H newc|gzip > ./initramfs.cpio.gz
+find -P . | grep -Ev ".git|README.md" |cpio -o -H newc|gzip > ../initramfs.cpio.gz
 
 # step2: replace kernel initramfs
-cp ./initramfs.cpio KERNEL/SOURCES/
+cp ../initramfs.cpio KERNEL/SOURCES/
 
 # how to debug initramfs
 
