@@ -1,10 +1,10 @@
 #! /usr/bin/ash
 
-mkdir -p dev
-mkdir -p proc
-mkdir -p run
-mkdir -p sysroot
-mkdir -p sys
+mkdir -p /dev
+mkdir -p /proc
+mkdir -p /run
+mkdir -p /sysroot
+mkdir -p /sys
 
 # Mount the /proc and /sys filesystems.
 mount -t devtmpfs none /dev
@@ -16,7 +16,7 @@ mount -t tmpfs -o rw,nosuid,nodev,mode=755 tmpfs /run
 
 rescue_shell() {
     echo "Something went wrong. Dropping to a shell."
-    exec ash
+    exec /usr/bin/ash
 }
 
 # enable lvm VG
