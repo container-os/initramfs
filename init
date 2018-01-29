@@ -1,6 +1,5 @@
 #! /usr/bin/ash
 
-mkdir -p /dev
 mkdir -p /proc
 mkdir -p /run
 mkdir -p /sysroot
