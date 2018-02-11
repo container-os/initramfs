@@ -20,13 +20,13 @@ rescue_shell() {
 
 # enable lvm VG
 echo "make lvm group"
-lvm vgscan --mknodes
-lvm lvchange -a ly atomicos/root
-lvm vgscan --mknodes
+lvm.static vgscan --mknodes
+lvm.static lvchange -a ly atomicos/root
+lvm.static vgscan --mknodes
 
 mount /dev/mapper/atomicos-root /sysroot
 
-/usr/lib/ostree/ostree-prepare-root /sysroot || rescue_shell
+ostree-prepare-root /sysroot || rescue_shell
 
 umount /dev /proc /sys
 echo "switch to rootfs"
